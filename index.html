@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>CoffeeRun</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+
 </head>
 <body class="container">
 
@@ -42,6 +43,12 @@
                         Grande
                     </label>
                 </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="size" value="xtra-large">
+                        John Holmes Size
+                    </label>
+                </div>
 
                 <div class="form-group">
                     <label for="flavourShot">Flavour Shot</label>
@@ -55,8 +62,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="strengthLevel">Caffeine Rating</label>
-                    <input name="strength" id="strengthLevel" type="range" value="30">
+                    <div>
+                        <label for="strengthLevel">Caffeine Rating</label>
+                    </div>
+                    <input name="strength" id="strengthLevel" type="range" value="30" onchange="onSliderUpdate(this)">
                 </div>
 
                 <button type="submit" class="btn btn-default">Submit</button>
@@ -67,8 +76,12 @@
     </div>
 </section>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"      charset="utf-8"></script>
+<script src="scripts/formhandler.js" charset="utf-8"></script>
 <script src="scripts/datastore.js" charset="utf-8"></script>
-<script src="scripts/main.js" charset="utf-8"></script>
 <script src="scripts/truck.js" charset="utf-8"></script>
+<script src="scripts/main.js" charset="utf-8"></script>
+
+
 </body>
 </html>
