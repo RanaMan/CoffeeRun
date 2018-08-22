@@ -10,26 +10,32 @@
 
   Truck.prototype.createOrder = function(order){
     console.log('Adding order for ' + order.emailAddress);
-    this.db.add(order.emailAddress, order);
+    return this.db.add(order.emailAddress, order);
   }
 
   Truck.prototype.deliverOrder = function (customerId) {
     console.log('Delivering order for ' + customerId);
-    this.db.remove(customerId);
+    return this.db.remove(customerId);
   };
 
-  Truck.prototype.printOrders = function () {
+  Truck.prototype.printOrders = function (printFn) {
 
-    //So this is fucked... the print orders function has context of "this"
-    var customerIdArray = Object.keys(this.db.getAll());
+    return this.db.getAll()
+        .then(function (orders) {
+            var customerIdArray = Object.keys(orders);
 
-    console.log('Truck #' + this.truckId + ' has pending orders:');
+            console.log('Truck #' + this.truckId + ' has pending orders:');
 
-    //But the forEach doesn't for some reason that I don't quite get..
-    customerIdArray.forEach(function (id) {
-        console.log(this.db.get(id));
-        //adding the bind passed the context of this into the function implicitly.
-      }.bind(this));
+            //But the forEach doesn't for some reason that I don't quite get..
+            customerIdArray.forEach(function (id) {
+                console.log(orders[id]);
+                if(printFn){
+                  printFn(orders[id]);
+                }
+                //adding the bind passed the context of this into the function implicitly.
+            }.bind(this));
+        }.bind(this))
+
 
   };
 

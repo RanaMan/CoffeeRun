@@ -26,10 +26,13 @@
 
             //The value of the checkbox is the email address
             var email = event.target.value;
-            //remove the proper row
-            this.removeRow(email);
+
+
             //execute deliverOrder on the truck
-            fn(email);
+            fn(email)
+                .then(function (){
+                    this.removeRow(email);
+                }.bind(this));
 
         }.bind(this));
     };
